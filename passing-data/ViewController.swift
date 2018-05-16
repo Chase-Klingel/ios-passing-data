@@ -10,6 +10,10 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var label: UILabel!
+    @IBOutlet weak var textField: UITextField!
+    @IBOutlet weak var forwardMessageBtn: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -21,5 +25,15 @@ class ViewController: UIViewController {
     }
 
 
+    @IBAction func sendButtonPressed(_ sender: Any) {
+        performSegue(withIdentifier: "sendDataForwards", sender: self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if (segue.identifier == "sendDataForwards") {
+            let destinationVC = segue.destination as! ViewControllerTwo
+            destinationVC.data = textField.text!
+        }
+    }
 }
 
