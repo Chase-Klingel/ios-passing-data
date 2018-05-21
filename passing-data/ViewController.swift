@@ -19,10 +19,6 @@ class ViewController: UIViewController, CanReceive {
         
         label.text = data
     }
-
-    @IBAction func turnBlue(_ sender: Any) {
-        self.view.backgroundColor = UIColor.blue
-    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
