@@ -8,17 +8,22 @@
 
 import UIKit
 
-class ViewController: UIViewController {
-
+class ViewController: UIViewController, CanReceive {
+    var data = ""
     @IBOutlet weak var label: UILabel!
     @IBOutlet weak var textField: UITextField!
     @IBOutlet weak var forwardMessageBtn: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        label.text = data
     }
 
+    @IBAction func turnBlue(_ sender: Any) {
+        self.view.backgroundColor = UIColor.blue
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -31,9 +36,14 @@ class ViewController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if (segue.identifier == "sendDataForwards") {
-            let destinationVC = segue.destination as! ViewControllerTwo
-            destinationVC.data = textField.text!
+            let vcTwo = segue.destination as! ViewControllerTwo
+            vcTwo.data = textField.text!
+            vcTwo.delegate = self
         }
+    }
+    
+    func dataReceived(data: String) {
+        label.text = data
     }
 }
 
